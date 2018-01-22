@@ -1,0 +1,60 @@
+@page
+@model MentoringApp.Pages.Mentees.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Mentee</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Mentee.ID" />
+            <div class="form-group">
+                <label asp-for="Mentee.FirstName" class="control-label"></label>
+                <input asp-for="Mentee.FirstName" class="form-control" />
+                <span asp-validation-for="Mentee.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mentee.LastName" class="control-label"></label>
+                <input asp-for="Mentee.LastName" class="form-control" />
+                <span asp-validation-for="Mentee.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mentee.Email" class="control-label"></label>
+                <input asp-for="Mentee.Email" class="form-control" />
+                <span asp-validation-for="Mentee.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mentee.Phone" class="control-label"></label>
+                <input asp-for="Mentee.Phone" class="form-control" />
+                <span asp-validation-for="Mentee.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mentee.Faculty" class="control-label"></label>
+                <input asp-for="Mentee.Faculty" class="form-control" />
+                <span asp-validation-for="Mentee.Faculty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mentee.Program" class="control-label"></label>
+                <input asp-for="Mentee.Program" class="form-control" />
+                <span asp-validation-for="Mentee.Program" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
