@@ -1,0 +1,4 @@
+syntax: glob
+MentoringApp/.vs/
+MentoringApp/MentoringApp/bin/
+MentoringApp/MentoringApp/obj/

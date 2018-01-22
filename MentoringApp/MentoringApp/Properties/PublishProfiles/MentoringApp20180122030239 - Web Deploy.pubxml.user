@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAGGcM7oU2JUq+D5Gum67OPgAAAAACAAAAAAAQZgAAAAEAACAAAACbjcnf2GgvaSS2vUSNuYLiSqTwMaCg71g2JTGumehBPwAAAAAOgAAAAAIAACAAAABP/RMFxr9Zo8xcL4SZUPcHGu75fNw8L/0Nez8WPrNMVYAAAABN+Q+EwGCjcoPJNH8upiF0/gqXPdmANpIdUMX4ExIw08cIX0654YZJRy96UlmiBB9aKBp2gAgNC1OIiWijjIXGqvHx3MuC+3fC+c5Brp8OZyUwuuBaOoBgFGt6wVsr7tPE7vkkYpRPlr3UzoPXbAT4HFlMMn12NOHEca2W2LTzgkAAAADYjnUJOWOmhIBYbCZ+0DXL1AjrwLW4qCIOr5Uxm/wiEou98eXIYYMo7JS6nC4sbT1PxW/k46LOSAeWUhzvUaex</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:mentoringapp20180122030239dbserver.database.windows.net,1433;Initial Catalog=MentoringApp20180122030239_db;User Id=adminuser@mentoringapp20180122030239dbserver;Password=Sy54dm!n5020</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="MentoringApp.Data.ApplicationDbContext">
+      <Value>Data Source=tcp:mentoringapp20180122030239dbserver.database.windows.net,1433;Initial Catalog=MentoringApp20180122030239_db;User Id=adminuser@mentoringapp20180122030239dbserver;Password=Sy54dm!n5020</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
