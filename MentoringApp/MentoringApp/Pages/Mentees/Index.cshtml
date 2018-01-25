@@ -8,35 +8,167 @@
 <h2>Mentees</h2>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Create New</a> | <a asp-page="DeleteAll">Delete All</a> | <a asp-page="BulkUpload">Bulk Add</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Mentee[0].FirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Mentee[0].LastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Mentee[0].Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Mentee[0].Phone)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Mentee[0].Faculty)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Mentee[0].Program)
-                </th>
             <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].Faculty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].Program)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].IsGrad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].IsInternational)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].IsExchange)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].IsMature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].IsTransfer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].IsPathways)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].IsIndigenous)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].IsFirstGen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].CountryOfOrigin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].MeetOtherStudentsInFaculty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].MeetOtherStudentsCommute)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].MeetOtherStudentsOnCampus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].MeetOtherStudentsOffCampus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].MeetOtherStudentsTransfer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].MeetOtherStudents21)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].MeetOtherStudentsInt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].MeetOtherStudentsClasses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].MeetOtherStudentsClubs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].MeetOtherStudentsIndigenous)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].MeetOtherStudentsFirstGen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].WorksHard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].Thoughtful)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].AppreciatesNature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].HelpsOthers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].QuickToTrust)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].EnjoysDiscovering)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].HandlesStressWell)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].IsAthletic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].DoesWhatTheyWant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].RespectsTraditions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].NeedsQuietTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].MeetsResponsibilities)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].UnderstandScienceMath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].LivesInHarmony)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].IsCheerful)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].IsReserved)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].KeepsRoomTidy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].GenderIdentity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].SexualOrientation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].RacialIdentity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].Religion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].Languages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mentee[0].CanContact)
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.Mentee) {
         <tr>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a>&nbsp;|&nbsp;<a asp-page="./Details" asp-route-id="@item.ID">Details</a>&nbsp;|&nbsp;<a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
@@ -56,9 +188,133 @@
                 @Html.DisplayFor(modelItem => item.Program)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                @Html.DisplayFor(modelItem => item.IsGrad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsInternational)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsExchange)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsMature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsTransfer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPathways)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsIndigenous)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsFirstGen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryOfOrigin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetOtherStudentsInFaculty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetOtherStudentsCommute)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetOtherStudentsOnCampus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetOtherStudentsOffCampus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetOtherStudentsTransfer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetOtherStudents21)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetOtherStudentsInt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetOtherStudentsClasses)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetOtherStudentsClubs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetOtherStudentsIndigenous)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetOtherStudentsFirstGen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorksHard)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Thoughtful)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppreciatesNature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HelpsOthers)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuickToTrust)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnjoysDiscovering)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HandlesStressWell)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAthletic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoesWhatTheyWant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RespectsTraditions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NeedsQuietTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetsResponsibilities)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnderstandScienceMath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LivesInHarmony)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsCheerful)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsReserved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KeepsRoomTidy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenderIdentity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SexualOrientation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RacialIdentity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Religion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Languages)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CanContact)
             </td>
         </tr>
 }

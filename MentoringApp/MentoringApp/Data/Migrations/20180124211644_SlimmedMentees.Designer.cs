@@ -11,9 +11,10 @@ using System;
 namespace MentoringApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180124211644_SlimmedMentees")]
+    partial class SlimmedMentees
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,7 +114,7 @@ namespace MentoringApp.Data.Migrations
 
                     b.Property<string>("IsIndigenous");
 
-                    b.Property<string>("IsInternational");
+                    b.Property<string>("IsInternationalOrExchange");
 
                     b.Property<string>("IsMature");
 
