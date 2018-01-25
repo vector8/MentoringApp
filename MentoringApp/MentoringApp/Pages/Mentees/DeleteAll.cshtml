@@ -1,0 +1,16 @@
+@page
+@model MentoringApp.Pages.Mentees.DeleteAllModel
+
+@{
+    ViewData["Title"] = "DeleteAll";
+}
+
+<h2>Delete All</h2>
+
+<h3>Are you sure you want to delete all mentees? This action cannot be undone.</h3>
+<div>
+    <form method="post">
+        <input type="submit" value="Delete All" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

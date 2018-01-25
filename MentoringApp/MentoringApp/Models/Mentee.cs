@@ -32,93 +32,52 @@ namespace MentoringApp.Models
         [Required]
         public string Program { get; set; }
 
-        [Display(Name ="Identifies as Woman")]
-        public bool? IsWoman { get; set; }
+        [Display(Name = "Grad Student")]
+        public string IsGrad { get; set; }
 
-        public string Allergies { get; set; }
+        [Display(Name = "International Student")]
+        public string IsInternational { get; set; }
 
-        [Display(Name ="Dietary Requirements")]
-        public string DietaryRequirements { get; set; }
+        [Display(Name = "Exchange Student")]
+        public string IsExchange { get; set; }
 
-        [Display(Name = "Connect With Peers Priority")]
-        public string ConnectWithPeersPriority { get; set; }
+        [Display(Name = "Mature Student")]
+        public string IsMature { get; set; }
 
-        [Display(Name = "Learn Expectations Priority")]
-        public string LearnExpectationsPriority { get; set; }
+        [Display(Name = "Transfer Student")]
+        public string IsTransfer { get; set; }
 
-        [Display(Name = "Gain Program Info Priority")]
-        public string GainProgramInfoPriority { get; set; }
+        [Display(Name = "Pathways Student")]
+        public string IsPathways { get; set; }
 
-        [Display(Name = "Learn About Campus Services Priority")]
-        public string LearnCampusServicesPriority { get; set; }
+        [Display(Name = "Indigenous Student")]
+        public string IsIndigenous { get; set; }
 
-        [Display(Name = "Connect With Upper Years Priority")]
-        public string ConnectWithUpperYearsPriority { get; set; }
-
-        [Display(Name = "Identifies as Grad Student")]
-        public bool? IsGrad { get; set; }
-
-        [Display(Name = "International or Exchange")]
-        public string IsInternationalOrExchange { get; set; }   // null if neither
-
-        [Display(Name = "Identifies as Mature Student")]
-        public bool? IsMature { get; set; }
-
-        [Display(Name = "Identifies as Transfer Student")]
-        public bool? IsTransfer { get; set; }
-
-        [Display(Name = "Identifies as Pathways Student")]
-        public bool? IsPathways { get; set; }
-
-        [Display(Name = "Identifies as Indigenous")]
-        public bool? IsIndigenous { get; set; }
-
-        [Display(Name = "Identifies as First Gen Student")]
-        public bool? IsFirstGen { get; set; }
-
-        [Display(Name = "Will Attend Ignite")]
-        public bool? WillAttendIgnite { get; set; }
-
-        [Display(Name ="Reg. for Int. Orientation")]
-        public bool? InternationalStudentOrientation { get; set; }
+        [Display(Name = "First Gen Student")]
+        public string IsFirstGen { get; set; }
 
         [Display(Name = "Country of Origin")]
         public string CountryOfOrigin { get; set; }
 
-        [Display(Name = "Reg. for NASP Program")]
-        public bool? NaspProgram { get; set; }
-
-        [Display(Name = "Arriving in Canada")]
-        public DateTime? ArriveInCanada { get; set; }
-
-        [Display(Name = "NASP Reg. Date")]
-        public DateTime? NaspRegisterDate { get; set; }
-
-        [Display(Name = "Prev. Institution")]
-        public string PrevInstitution { get; set; }
-
-        [Display(Name = "Reg. for MTPS Orientation")]
-        public bool? MtpsOrientation { get; set; }
-
-        [Display(Name = "Meet Other Students in Faculty")]
+        [Display(Name = "Meet Students in Faculty")]
         public string MeetOtherStudentsInFaculty { get; set; }
 
-        [Display(Name = "Meet Other Students Who Commute")]
+        [Display(Name = "Meet Students Who Commute")]
         public string MeetOtherStudentsCommute { get; set; }
 
-        [Display(Name = "Meet Other Students On Campus")]
+        [Display(Name = "Meet Students On Campus")]
         public string MeetOtherStudentsOnCampus { get; set; }
 
-        [Display(Name = "Meet Other Students Off Campus")]
+        [Display(Name = "Meet Students Off Campus")]
         public string MeetOtherStudentsOffCampus { get; set; }
 
-        [Display(Name = "Meet Other Transfer Students")]
+        [Display(Name = "Meet Transfer Students")]
         public string MeetOtherStudentsTransfer { get; set; }
 
-        [Display(Name = "Meet Other Students Over 21")]
+        [Display(Name = "Meet Mature Students")]
         public string MeetOtherStudents21 { get; set; }
 
-        [Display(Name = "Meet Other Int. Students")]
+        [Display(Name = "Meet Int. Students")]
         public string MeetOtherStudentsInt { get; set; }
 
         [Display(Name = "Meet Students In Classes")]
@@ -193,12 +152,11 @@ namespace MentoringApp.Models
         [Display(Name = "Racial Identity")]
         public string RacialIdentity { get; set; }
 
-        [Display(Name = "Religion")]
         public string Religion { get; set; }
 
         public string Languages { get; set; }
 
         [Display(Name = "Can Contact")]
-        public bool? CanContact { get; set; }
+        public string CanContact { get; set; }
     }
 }
