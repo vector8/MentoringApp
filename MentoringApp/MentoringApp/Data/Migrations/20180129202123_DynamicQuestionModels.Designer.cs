@@ -11,9 +11,10 @@ using System;
 namespace MentoringApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180129202123_DynamicQuestionModels")]
+    partial class DynamicQuestionModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,41 +72,7 @@ namespace MentoringApp.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("MentoringApp.Models.Answer", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AnswerText")
-                        .IsRequired();
-
-                    b.Property<int>("QuestionFkID");
-
-                    b.Property<int>("StudentFkID");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("QuestionFkID");
-
-                    b.HasIndex("StudentFkID");
-
-                    b.ToTable("Answer");
-                });
-
-            modelBuilder.Entity("MentoringApp.Models.Question", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("QuestionText")
-                        .IsRequired();
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Question");
-                });
-
-            modelBuilder.Entity("MentoringApp.Models.Student", b =>
+            modelBuilder.Entity("MentoringApp.Models.Mentee", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
@@ -119,8 +86,6 @@ namespace MentoringApp.Data.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired();
 
-                    b.Property<bool>("IsMentor");
-
                     b.Property<string>("LastName")
                         .IsRequired();
 
@@ -129,11 +94,37 @@ namespace MentoringApp.Data.Migrations
                     b.Property<string>("Program")
                         .IsRequired();
 
-                    b.Property<string>("StudentNumber");
+                    b.HasKey("ID");
+
+                    b.ToTable("Mentee");
+                });
+
+            modelBuilder.Entity("MentoringApp.Models.Mentor", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("Faculty")
+                        .IsRequired();
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<string>("Program")
+                        .IsRequired();
+
+                    b.Property<string>("StudentNumber")
+                        .IsRequired();
 
                     b.HasKey("ID");
 
-                    b.ToTable("Student");
+                    b.ToTable("Mentor");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -242,19 +233,6 @@ namespace MentoringApp.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("MentoringApp.Models.Answer", b =>
-                {
-                    b.HasOne("MentoringApp.Models.Question", "QuestionFk")
-                        .WithMany()
-                        .HasForeignKey("QuestionFkID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("MentoringApp.Models.Student", "StudentFk")
-                        .WithMany()
-                        .HasForeignKey("StudentFkID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

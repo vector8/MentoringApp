@@ -11,9 +11,10 @@ using System;
 namespace MentoringApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180129204253_ChangeToStudents")]
+    partial class ChangeToStudents
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,40 +70,6 @@ namespace MentoringApp.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("MentoringApp.Models.Answer", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AnswerText")
-                        .IsRequired();
-
-                    b.Property<int>("QuestionFkID");
-
-                    b.Property<int>("StudentFkID");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("QuestionFkID");
-
-                    b.HasIndex("StudentFkID");
-
-                    b.ToTable("Answer");
-                });
-
-            modelBuilder.Entity("MentoringApp.Models.Question", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("QuestionText")
-                        .IsRequired();
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Question");
                 });
 
             modelBuilder.Entity("MentoringApp.Models.Student", b =>
@@ -242,19 +209,6 @@ namespace MentoringApp.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("MentoringApp.Models.Answer", b =>
-                {
-                    b.HasOne("MentoringApp.Models.Question", "QuestionFk")
-                        .WithMany()
-                        .HasForeignKey("QuestionFkID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("MentoringApp.Models.Student", "StudentFk")
-                        .WithMany()
-                        .HasForeignKey("StudentFkID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

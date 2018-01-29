@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using MentoringApp.Data;
 using MentoringApp.Models;
 
-namespace MentoringApp.Pages.Mentees
+namespace MentoringApp.Pages.Students
 {
     public class EditModel : PageModel
     {
@@ -21,7 +21,7 @@ namespace MentoringApp.Pages.Mentees
         }
 
         [BindProperty]
-        public Mentee Mentee { get; set; }
+        public Student Student { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,9 +30,9 @@ namespace MentoringApp.Pages.Mentees
                 return NotFound();
             }
 
-            Mentee = await _context.Mentee.SingleOrDefaultAsync(m => m.ID == id);
+            Student = await _context.Student.SingleOrDefaultAsync(m => m.ID == id);
 
-            if (Mentee == null)
+            if (Student == null)
             {
                 return NotFound();
             }
@@ -46,7 +46,7 @@ namespace MentoringApp.Pages.Mentees
                 return Page();
             }
 
-            _context.Attach(Mentee).State = EntityState.Modified;
+            _context.Attach(Student).State = EntityState.Modified;
 
             try
             {
@@ -54,7 +54,7 @@ namespace MentoringApp.Pages.Mentees
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MenteeExists(Mentee.ID))
+                if (!StudentExists(Student.ID))
                 {
                     return NotFound();
                 }
@@ -67,9 +67,9 @@ namespace MentoringApp.Pages.Mentees
             return RedirectToPage("./Index");
         }
 
-        private bool MenteeExists(int id)
+        private bool StudentExists(int id)
         {
-            return _context.Mentee.Any(e => e.ID == id);
+            return _context.Student.Any(e => e.ID == id);
         }
     }
 }

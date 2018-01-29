@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MentoringApp.Data;
 using MentoringApp.Models;
 
-namespace MentoringApp.Pages.Mentors
+namespace MentoringApp.Pages.Students
 {
     public class CreateModel : PageModel
     {
@@ -25,7 +25,7 @@ namespace MentoringApp.Pages.Mentors
         }
 
         [BindProperty]
-        public Mentor Mentor { get; set; }
+        public Student Student { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -34,7 +34,7 @@ namespace MentoringApp.Pages.Mentors
                 return Page();
             }
 
-            _context.Mentor.Add(Mentor);
+            _context.Student.Add(Student);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -8,22 +8,23 @@ using Microsoft.EntityFrameworkCore;
 using MentoringApp.Data;
 using MentoringApp.Models;
 
-namespace MentoringApp.Pages.Mentors
+namespace MentoringApp.Pages.Students
 {
-    public class IndexModel : PageModel
+    public class DeleteAllModel : PageModel
     {
         private readonly MentoringApp.Data.ApplicationDbContext _context;
 
-        public IndexModel(MentoringApp.Data.ApplicationDbContext context)
+        public DeleteAllModel(MentoringApp.Data.ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IList<Mentor> Mentor { get;set; }
-
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
-            Mentor = await _context.Mentor.ToListAsync();
+            _context.Database.ExecuteSqlCommand("delete from Student");
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
         }
     }
 }
