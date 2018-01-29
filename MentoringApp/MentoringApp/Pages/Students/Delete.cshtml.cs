@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MentoringApp.Data;
 using MentoringApp.Models;
 
-namespace MentoringApp.Pages.Mentors
+namespace MentoringApp.Pages.Students
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace MentoringApp.Pages.Mentors
         }
 
         [BindProperty]
-        public Mentor Mentor { get; set; }
+        public Student Student { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,9 +29,9 @@ namespace MentoringApp.Pages.Mentors
                 return NotFound();
             }
 
-            Mentor = await _context.Mentor.SingleOrDefaultAsync(m => m.ID == id);
+            Student = await _context.Student.SingleOrDefaultAsync(m => m.ID == id);
 
-            if (Mentor == null)
+            if (Student == null)
             {
                 return NotFound();
             }
@@ -45,11 +45,11 @@ namespace MentoringApp.Pages.Mentors
                 return NotFound();
             }
 
-            Mentor = await _context.Mentor.FindAsync(id);
+            Student = await _context.Student.FindAsync(id);
 
-            if (Mentor != null)
+            if (Student != null)
             {
-                _context.Mentor.Remove(Mentor);
+                _context.Student.Remove(Student);
                 await _context.SaveChangesAsync();
             }
 

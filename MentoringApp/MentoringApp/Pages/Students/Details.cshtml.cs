@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MentoringApp.Data;
 using MentoringApp.Models;
 
-namespace MentoringApp.Pages.Mentees
+namespace MentoringApp.Pages.Students
 {
     public class DetailsModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace MentoringApp.Pages.Mentees
             _context = context;
         }
 
-        public Mentee Mentee { get; set; }
+        public Student Student { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,9 +28,9 @@ namespace MentoringApp.Pages.Mentees
                 return NotFound();
             }
 
-            Mentee = await _context.Mentee.SingleOrDefaultAsync(m => m.ID == id);
+            Student = await _context.Student.SingleOrDefaultAsync(m => m.ID == id);
 
-            if (Mentee == null)
+            if (Student == null)
             {
                 return NotFound();
             }

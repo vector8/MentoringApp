@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MentoringApp.Models
 {
-    public class Mentor
+    public class Student
     {
         public int ID { get; set; }
 
@@ -21,6 +21,9 @@ namespace MentoringApp.Models
         [Required]
         public string Email { get; set; }
 
+        [Display(Name = "Student Number")]
+        public string StudentNumber { get; set; }
+
         //[DataType(DataType.PhoneNumber)]
         //[Phone]
         //[DisplayFormat(ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:(###) ###-####}")]
@@ -31,5 +34,9 @@ namespace MentoringApp.Models
 
         [Required]
         public string Program { get; set; }
+
+        [Required]
+        [Display(Name = "Is Mentor?")]
+        public bool IsMentor { get; set; }
     }
 }

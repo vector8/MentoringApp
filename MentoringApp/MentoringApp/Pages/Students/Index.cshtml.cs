@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MentoringApp.Data;
 using MentoringApp.Models;
 
-namespace MentoringApp.Pages.Mentees
+namespace MentoringApp.Pages.Students
 {
     public class IndexModel : PageModel
     {
@@ -19,11 +19,11 @@ namespace MentoringApp.Pages.Mentees
             _context = context;
         }
 
-        public IList<Mentee> Mentee { get;set; }
+        public IList<Student> Student { get;set; }
 
         public async Task OnGetAsync()
         {
-            Mentee = await _context.Mentee.ToListAsync();
+            Student = await _context.Student.ToListAsync();
         }
     }
 }

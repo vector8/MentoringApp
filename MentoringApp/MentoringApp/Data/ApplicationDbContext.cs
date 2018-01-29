@@ -23,7 +23,8 @@ namespace MentoringApp.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-        public DbSet<Mentee> Mentee { get; set; }
-        public DbSet<Mentor> Mentor { get; set; }
+        public DbSet<Student> Student { get; set; }
+        public DbSet<Question> Question { get; set; }
+        public DbSet<Answer> Answer { get; set; }
     }
 }
