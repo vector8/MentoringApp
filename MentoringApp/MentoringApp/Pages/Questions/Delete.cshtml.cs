@@ -49,6 +49,9 @@ namespace MentoringApp.Pages.Questions
 
             if (Question != null)
             {
+                var answers = await _context.Answer.Where(a => a.QuestionFk.ID == Question.ID).ToListAsync();
+                _context.Answer.RemoveRange(answers);
+
                 _context.Question.Remove(Question);
                 await _context.SaveChangesAsync();
             }

@@ -58,7 +58,7 @@
             @foreach (var q in Model.Question)
             {
                 <div class="form-group">
-                    <label>@q.QuestionText</label>
+                    <label>@q.QuestionText</label><br />
                     <input id="@q.QuestionText" name="@q.QuestionText" type="Text"/>
                 </div>
             }
