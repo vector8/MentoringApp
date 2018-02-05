@@ -59,7 +59,7 @@
             @foreach (var q in Model.Question)
             {
             <div class="form-group">
-                <label>@q.QuestionText</label>
+                <label>@q.QuestionText</label><br />
                 <input id="@q.QuestionText" name="@q.QuestionText" type="Text" value="@Model.AnswerDict[q.ID].AnswerText"/>
                 @*<input type="hidden" asp-for="AnswerDict[q.ID].ID" />
                 <input asp-for="AnswerDict[q.ID].AnswerText" class="form-control" />
