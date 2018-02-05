@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using MentoringApp.Data;
 using MentoringApp.Models;
 
-namespace MentoringApp.Pages.Students
+namespace MentoringApp.Pages.Questions
 {
     public class CreateModel : PageModel
     {
@@ -22,15 +21,11 @@ namespace MentoringApp.Pages.Students
 
         public IActionResult OnGet()
         {
-            Question = _context.Question.ToList();
-
             return Page();
         }
 
         [BindProperty]
-        public Student Student { get; set; }
-
-        public IList<Question> Question { get; set; }
+        public Question Question { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -39,20 +34,7 @@ namespace MentoringApp.Pages.Students
                 return Page();
             }
 
-            _context.Student.Add(Student);
-            await _context.SaveChangesAsync();
-
-            var questions = await _context.Question.ToListAsync();
-            foreach(Question q in questions)
-            {
-                Answer a = new Answer();
-                a.AnswerText = String.Format("{0}", Request.Form[q.QuestionText]);
-                a.StudentFk = Student;
-                a.QuestionFk = q;
-
-                _context.Answer.Add(a);
-            }
-
+            _context.Question.Add(Question);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
