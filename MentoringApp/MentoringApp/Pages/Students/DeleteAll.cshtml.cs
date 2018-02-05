@@ -21,6 +21,7 @@ namespace MentoringApp.Pages.Students
 
         public async Task<IActionResult> OnPostAsync()
         {
+            _context.Database.ExecuteSqlCommand("delete from Answer");
             _context.Database.ExecuteSqlCommand("delete from Student");
             await _context.SaveChangesAsync();
 

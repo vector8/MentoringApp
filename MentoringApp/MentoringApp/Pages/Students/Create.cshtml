@@ -29,6 +29,11 @@
                 <span asp-validation-for="Student.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Student.StudentNumber" class="control-label"></label>
+                <input asp-for="Student.StudentNumber" class="form-control" />
+                <span asp-validation-for="Student.StudentNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Student.Phone" class="control-label"></label>
                 <input asp-for="Student.Phone" class="form-control" />
                 <span asp-validation-for="Student.Phone" class="text-danger"></span>
@@ -43,6 +48,20 @@
                 <input asp-for="Student.Program" class="form-control" />
                 <span asp-validation-for="Student.Program" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Student.IsMentor" /> @Html.DisplayNameFor(model => model.Student.IsMentor)
+                    </label>
+                </div>
+            </div>
+            @foreach (var q in Model.Question)
+            {
+                <div class="form-group">
+                    <label>@q.QuestionText</label>
+                    <input id="@q.QuestionText" name="@q.QuestionText" type="Text"/>
+                </div>
+            }
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

@@ -38,8 +38,8 @@ namespace MentoringApp
                 {
                     options.Conventions.AuthorizeFolder("/Account/Manage");
                     options.Conventions.AuthorizePage("/Account/Logout");
-                    options.Conventions.AuthorizeFolder("/Mentees");
-                    options.Conventions.AuthorizeFolder("/Mentors");
+                    options.Conventions.AuthorizeFolder("/Students");
+                    options.Conventions.AuthorizeFolder("/Questions");
                 });
 
             // Register no-op EmailSender used by account confirmation and password reset during development
