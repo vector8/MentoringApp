@@ -19,31 +19,46 @@ namespace MentoringApp.Pages.Students
             _context = context;
         }
 
-        public IList<Student> Student { get;set; }
+        public IList<Student> Student { get; set; }
         public IList<Question> Question { get; set; }
         public Dictionary<string, string> AnswerDict { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string searchString, string typeOfStudent)
         {
-            Student = await _context.Student.ToListAsync();
+            //Student = new List<Models.Student>();
+
+            var students = from s in _context.Student
+                           select s;
+
+            if (typeOfStudent == "Mentee")
+            {
+                students = students.Where(s => s.IsMentor == false);
+            }
+            else if (typeOfStudent == "Mentor")
+            {
+                students = students.Where(s => s.IsMentor == true);
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => s.containsSearchString(searchString));
+            }
+
+            Student = await students.ToListAsync();
 
             Question = await _context.Question.ToListAsync();
 
-            var answers = await _context.Answer.ToListAsync();
+            var answerSelect = from a in _context.Answer
+                               join s in students on a.StudentFk.ID equals s.ID
+                               select a;
+            var answers = await answerSelect.ToListAsync();
 
             AnswerDict = new Dictionary<string, string>();
 
-            foreach(Answer a in answers)
+            foreach (Answer a in answers)
             {
                 AnswerDict[a.QuestionFk.ID.ToString() + "-" + a.StudentFk.ID.ToString()] = a.AnswerText;
             }
-
-            //StudentAnswerPair = new List<Tuple<Student, Answer>>();
-            //foreach(Student s in Student)
-            //{
-            //    Answer ans = (await _context.Answer.Where(a => a.StudentFk.ID == s.ID).ToListAsync()).First();
-            //    StudentAnswerPair.Add(new Tuple<Student, Answer>(s, ans));
-            //}
         }
     }
 }

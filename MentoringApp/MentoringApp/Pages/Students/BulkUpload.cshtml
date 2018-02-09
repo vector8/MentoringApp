@@ -8,6 +8,7 @@
 <hr />
 
 <h3>Upload a spreadsheet that contains the data of several Students to add them all at once.</h3>
+<h4>Make sure that the column headers exactly match the questions that you have created in the Survey Questions page.</h4>
 
 <div class="row">
     <div class="col-md-4">
@@ -17,10 +18,10 @@
                 <input asp-for="FileUpload.Title" type="text" class="form-control" />
                 <span asp-validation-for="FileUpload.Title" class="text-danger"></span>
             </div>
-            <div class="form-group" hidden="hidden">
-                <label asp-for="FileUpload.UploadPublicSchedule" class="control-label"></label>
-                <input asp-for="FileUpload.UploadPublicSchedule" type="file" class="form-control" style="height:auto" />
-                <span asp-validation-for="FileUpload.UploadPublicSchedule" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="FileUpload.UploadMentorData" class="control-label"></label>
+                <input asp-for="FileUpload.UploadMentorData" type="file" class="form-control" style="height:auto" />
+                <span asp-validation-for="FileUpload.UploadMentorData" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FileUpload.UploadMenteeData" class="control-label"></label>
