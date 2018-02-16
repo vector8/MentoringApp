@@ -10,6 +10,8 @@
     <Compile Remove="Data\Migrations\20180122194428_PhoneLongTest.Designer.cs" />
     <Compile Remove="Data\Migrations\20180204215445_AddIsMentorToStudent.cs" />
     <Compile Remove="Data\Migrations\20180204215445_AddIsMentorToStudent.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180209041933_FileUploadAddMentorData.cs" />
+    <Compile Remove="Data\Migrations\20180209041933_FileUploadAddMentorData.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
