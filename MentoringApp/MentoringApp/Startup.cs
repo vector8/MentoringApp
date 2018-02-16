@@ -29,7 +29,7 @@ namespace MentoringApp
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -40,7 +40,15 @@ namespace MentoringApp
                     options.Conventions.AuthorizePage("/Account/Logout");
                     options.Conventions.AuthorizeFolder("/Students");
                     options.Conventions.AuthorizeFolder("/Questions");
+                    options.Conventions.AuthorizeFolder("/Account/Admin", "Admin");
+                    options.Conventions.AuthorizePage("/Account/Register", "NoUserEver");
                 });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("NoUserEver", policy => policy.RequireClaim("NoUserEver"));
+            });
 
             // Register no-op EmailSender used by account confirmation and password reset during development
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
@@ -66,6 +74,8 @@ namespace MentoringApp
             app.UseAuthentication();
 
             app.UseMvc();
+
+            app.UseIdentity();
         }
     }
 }

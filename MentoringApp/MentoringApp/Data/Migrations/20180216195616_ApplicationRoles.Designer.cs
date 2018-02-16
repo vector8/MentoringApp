@@ -11,9 +11,10 @@ using System;
 namespace MentoringApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180216195616_ApplicationRoles")]
+    partial class ApplicationRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,8 +30,6 @@ namespace MentoringApp.Data.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Description");
-
-                    b.Property<bool>("Editable");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256);
@@ -58,8 +57,6 @@ namespace MentoringApp.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<bool>("Editable");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -68,8 +65,6 @@ namespace MentoringApp.Data.Migrations
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("Name");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
