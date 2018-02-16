@@ -8,8 +8,21 @@
 <h2>Index</h2>
 
 <p>
-    <a asp-page="Create">Create New</a> | <a asp-page="DeleteAll">Delete All</a>
+    <a asp-page="Create">Create New</a> | <a asp-page="DeleteAll">Delete All</a> | <a asp-page="BulkUpload">Bulk Upload</a>
 </p>
+<form>
+    <p>
+        Search: <input type="text" name="searchString" />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Type: <select name="typeOfStudent">
+            <option value="Any">Any</option>
+            <option value="Mentee">Mentee</option>
+            <option value="Mentor">Mentor</option>
+        </select>
+        &nbsp;&nbsp;&nbsp;
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>

@@ -9,8 +9,8 @@ namespace MentoringApp.Models
         [StringLength(60, MinimumLength = 3)]
         public string Title { get; set; }
 
-        [Display(Name = "Public Schedule")]
-        public IFormFile UploadPublicSchedule { get; set; }
+        [Display(Name = "Mentor Data")]
+        public IFormFile UploadMentorData { get; set; }
 
         [Required]
         [Display(Name = "Mentee Data")]
