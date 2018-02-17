@@ -21,7 +21,7 @@ namespace MentoringApp.Pages.Account.Admin.Users
             roleManager = rm;
         }
 
-        public IList<User> Users { get; set; }
+        public IList<UserEdit> Users { get; set; }
         public IList<Role> Roles { get; set; }
 
         public async Task OnGetAsync()
@@ -35,19 +35,19 @@ namespace MentoringApp.Pages.Account.Admin.Users
             }).ToListAsync();
 
             var users = await userManager.Users.ToListAsync();
-            Users = new List<User>();
+            Users = new List<UserEdit>();
             foreach (Data.ApplicationUser au in users)
             {
-                string role = userManager.GetRolesAsync(au).Result.Single();
+                string role = (await userManager.GetRolesAsync(au)).SingleOrDefault();
 
-                User u = new User
+                UserEdit u = new UserEdit
                 {
                     Id = au.Id,
                     Name = au.Name,
                     UserName = au.UserName,
                     Email = au.Email,
                     Editable = au.Editable,
-                    Role = Roles.Where(r => r.RoleName == role).Single()
+                    Role = Roles.Where(r => r.RoleName == role).SingleOrDefault()
                 };
                 Users.Add(u);
             }

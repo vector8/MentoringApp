@@ -51,7 +51,7 @@ namespace MentoringApp.Pages.Account.Admin.Roles
                 return NotFound();
             }
 
-            ApplicationRole appRole = await roleManager.FindByIdAsync(Role.Id);
+            ApplicationRole appRole = await roleManager.FindByIdAsync(id);
 
             if (appRole != null && appRole.Editable)
             {
