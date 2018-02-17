@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MentoringApp.Data;
 using MentoringApp.Models;
@@ -13,15 +14,17 @@ namespace MentoringApp.Pages.Account.Admin.Users
 {
     public class DeleteModel : PageModel
     {
+        private readonly UserManager<MentoringApp.Data.ApplicationUser> userManager;
         private readonly RoleManager<MentoringApp.Data.ApplicationRole> roleManager;
 
-        public DeleteModel(RoleManager<MentoringApp.Data.ApplicationRole> rm)
+        public DeleteModel(UserManager<MentoringApp.Data.ApplicationUser> um, RoleManager<MentoringApp.Data.ApplicationRole> rm)
         {
+            userManager = um;
             roleManager = rm;
         }
 
         [BindProperty]
-        public Role Role { get; set; }
+        public UserEdit MyUser { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -30,17 +33,39 @@ namespace MentoringApp.Pages.Account.Admin.Users
                 return NotFound();
             }
 
-            Role = await roleManager.Roles.Select(r => new Role
-            {
-                Id = r.Id,
-                RoleName = r.Name,
-                Description = r.Description
-            }).SingleOrDefaultAsync(m => m.Id == id);
+            Data.ApplicationUser applicationUser = await userManager.FindByIdAsync(id);
 
-            if (Role == null)
+            if (applicationUser == null)
             {
                 return NotFound();
             }
+            else if (!applicationUser.Editable)
+            {
+                return RedirectToPage("/Account/AccessDenied");
+            }
+
+            var role = (await userManager.GetRolesAsync(applicationUser)).SingleOrDefault();
+            string roleID = null;
+            if (!String.IsNullOrEmpty(role))
+            {
+                roleID = roleManager.Roles.SingleOrDefault(r => r.Name == role).Id;
+            }
+
+            MyUser = new Models.UserEdit
+            {
+                Id = applicationUser.Id,
+                Name = applicationUser.Name,
+                UserName = applicationUser.UserName,
+                Email = applicationUser.Email,
+                Editable = applicationUser.Editable,
+                Role = await roleManager.Roles.Select(r => new Role
+                {
+                    Id = r.Id,
+                    RoleName = r.Name,
+                    Description = r.Description
+                }).SingleOrDefaultAsync(m => m.Id == roleID)
+            };
+
             return Page();
         }
 
@@ -51,11 +76,11 @@ namespace MentoringApp.Pages.Account.Admin.Users
                 return NotFound();
             }
 
-            ApplicationRole appRole = await roleManager.FindByIdAsync(Role.Id);
+            ApplicationUser applicationUser = await userManager.FindByIdAsync(id);
 
-            if (appRole != null && appRole.Editable)
+            if (applicationUser != null && applicationUser.Editable)
             {
-                await roleManager.DeleteAsync(appRole);
+                await userManager.DeleteAsync(applicationUser);
             }
 
             return RedirectToPage("./Index");

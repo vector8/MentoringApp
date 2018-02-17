@@ -24,7 +24,12 @@ namespace MentoringApp.Pages.Account.Admin.Users
         }
 
         [BindProperty]
-        public User MyUser { get; set; }
+        public UserEdit MyUser { get; set; }
+
+        public List<SelectListItem> Roles { get; set; }
+
+        [BindProperty]
+        public string RoleID { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
@@ -39,18 +44,28 @@ namespace MentoringApp.Pages.Account.Admin.Users
             {
                 return NotFound();
             }
-            else if(!applicationUser.Editable)
+            else if (!applicationUser.Editable)
             {
                 return RedirectToPage("/Account/AccessDenied");
             }
 
-            string role = userManager.GetRolesAsync(applicationUser).Result.Single();
+            Roles = roleManager.Roles.Select(r => new SelectListItem
+            {
+                Text = r.Name,
+                Value = r.Id
+            }).ToList();
 
-            MyUser = new User
+            var role = (await userManager.GetRolesAsync(applicationUser)).SingleOrDefault();
+            if (!String.IsNullOrEmpty(role))
+            {
+                RoleID = roleManager.Roles.SingleOrDefault(r => r.Name == role).Id;
+            }
+
+            MyUser = new UserEdit
             {
                 Id = applicationUser.Id,
                 Name = applicationUser.Name,
-                UserName = applicationUser.Name,
+                UserName = applicationUser.UserName,
                 Email = applicationUser.Email,
                 Editable = applicationUser.Editable,
                 Role = await roleManager.Roles.Select(r => new Role
@@ -58,7 +73,7 @@ namespace MentoringApp.Pages.Account.Admin.Users
                     Id = r.Id,
                     RoleName = r.Name,
                     Description = r.Description
-                }).SingleOrDefaultAsync(m => m.RoleName == role)
+                }).SingleOrDefaultAsync(m => m.Id == RoleID)
             };
 
             return Page();
@@ -73,36 +88,44 @@ namespace MentoringApp.Pages.Account.Admin.Users
 
             ApplicationUser applicationUser = await userManager.FindByIdAsync(MyUser.Id);
 
-            if(!applicationUser.Editable)
+            if (!applicationUser.Editable)
             {
                 return Page();
             }
 
-            //appRole.Name = Role.RoleName;
-            //appRole.Description = Role.Description;
+            applicationUser.Name = MyUser.Name;
+            applicationUser.UserName = MyUser.UserName;
+            applicationUser.Email = MyUser.Email;
 
-            //try
-            //{
-            //    await roleManager.UpdateAsync(appRole);
-            //}
-            //catch (DbUpdateConcurrencyException)
-            //{
-            //    if (! await RoleExists(Role.RoleName))
-            //    {
-            //        return NotFound();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }
-            //}
+            try
+            {
+                await userManager.UpdateAsync(applicationUser);
+
+                await userManager.RemoveFromRolesAsync(applicationUser, await userManager.GetRolesAsync(applicationUser));
+
+                if(!String.IsNullOrEmpty(RoleID))
+                {
+                    await userManager.AddToRoleAsync(applicationUser, (await roleManager.FindByIdAsync(RoleID)).Name);
+                }
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!await UserExists(MyUser.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return RedirectToPage("./Index");
         }
 
-        private async Task<bool> RoleExists(string name)
+        private async Task<bool> UserExists(string id)
         {
-            return await roleManager.RoleExistsAsync(name);
+            return (await userManager.FindByIdAsync(id)) != null;
         }
     }
 }

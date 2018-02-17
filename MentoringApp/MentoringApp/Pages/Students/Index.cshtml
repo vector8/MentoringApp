@@ -12,12 +12,9 @@
 </p>
 <form>
     <p>
-        Search: <input type="text" name="searchString" />
+        Search: <input type="text" name="searchString" value=@Model.filterString />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Type: <select name="typeOfStudent">
-            <option value="Any">Any</option>
-            <option value="Mentee">Mentee</option>
-            <option value="Mentor">Mentor</option>
+        Type: <select asp-for="studentType" asp-items="Model.StudentTypes" >
         </select>
         &nbsp;&nbsp;&nbsp;
         <input type="submit" value="Filter" />

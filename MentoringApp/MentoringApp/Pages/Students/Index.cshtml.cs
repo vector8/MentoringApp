@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MentoringApp.Data;
 using MentoringApp.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MentoringApp.Pages.Students
 {
@@ -17,24 +18,31 @@ namespace MentoringApp.Pages.Students
         public IndexModel(MentoringApp.Data.ApplicationDbContext context)
         {
             _context = context;
+            StudentTypes = new SelectList(new List<string>{ "Any", "Mentee", "Mentor" });
         }
 
+        public string filterString { get; set; }
+        public SelectList StudentTypes { get; set; }
+        public string studentType { get; set; }
         public IList<Student> Student { get; set; }
         public IList<Question> Question { get; set; }
         public Dictionary<string, string> AnswerDict { get; set; }
 
-        public async Task OnGetAsync(string searchString, string typeOfStudent)
+        public async Task OnGetAsync(string searchString, string studentType)
         {
             //Student = new List<Models.Student>();
+
+            filterString = searchString;
+            this.studentType = studentType;
 
             var students = from s in _context.Student
                            select s;
 
-            if (typeOfStudent == "Mentee")
+            if (studentType == "Mentee")
             {
                 students = students.Where(s => s.IsMentor == false);
             }
-            else if (typeOfStudent == "Mentor")
+            else if (studentType == "Mentor")
             {
                 students = students.Where(s => s.IsMentor == true);
             }
