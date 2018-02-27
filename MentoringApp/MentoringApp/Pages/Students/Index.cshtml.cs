@@ -19,6 +19,7 @@ namespace MentoringApp.Pages.Students
         {
             _context = context;
             StudentTypes = new SelectList(new List<string>{ "Any", "Mentee", "Mentor" });
+            TopList = new SelectList(new List<string> { "25", "50", "75", "100", "All" });
         }
 
         public string filterString { get; set; }
@@ -27,13 +28,18 @@ namespace MentoringApp.Pages.Students
         public IList<Student> Student { get; set; }
         public IList<Question> Question { get; set; }
         public Dictionary<string, string> AnswerDict { get; set; }
+        public SelectList TopList { get; set; }
+        public string top { get; set; }
+        public int TotalCount { get; set; }
+        public int DisplayedCount { get; set; }
 
-        public async Task OnGetAsync(string searchString, string studentType)
+        public async Task OnGetAsync(string searchString, string studentType, string top)
         {
             //Student = new List<Models.Student>();
 
             filterString = searchString;
             this.studentType = studentType;
+            this.top = top;
 
             var students = from s in _context.Student
                            select s;
@@ -50,6 +56,24 @@ namespace MentoringApp.Pages.Students
             if (!String.IsNullOrEmpty(searchString))
             {
                 students = students.Where(s => s.containsSearchString(searchString));
+            }
+
+            TotalCount = students.Count();
+
+            int topInt;
+            if(!String.IsNullOrEmpty(top) && int.TryParse(top, out topInt))
+            {
+                students = students.Take(topInt);
+                DisplayedCount = topInt;
+            }
+            else
+            {
+                DisplayedCount = TotalCount;
+            }
+
+            if(DisplayedCount > TotalCount)
+            {
+                DisplayedCount = TotalCount;
             }
 
             Student = await students.ToListAsync();

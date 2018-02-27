@@ -31,7 +31,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-page="/Index">Home</a></li>
-                    <li><a asp-page="/Students/Index">Students</a></li>
+                    <li><a asp-page="/Students/Index" asp-route-top="25">Students</a></li>
                     <li><a asp-page="/Questions/Index">Survey Questions</a></li>
                     @if (this.User.IsInRole("Admin"))
                     {
