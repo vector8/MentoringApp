@@ -38,6 +38,8 @@ namespace MentoringApp.Models
         [Required]
         [Display(Name = "Is Mentor?")]
         public bool IsMentor { get; set; }
+        
+        public Match Match { get; set; }
 
         public bool containsSearchString(string searchString)
         {

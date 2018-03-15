@@ -17,9 +17,20 @@ namespace MentoringApp.Pages.Questions
         public DetailsModel(MentoringApp.Data.ApplicationDbContext context)
         {
             _context = context;
+
+            var values = Enum.GetValues(typeof(Question.QuestionType)).Cast<Question.QuestionType>();
+
+            QuestionTypeText = new String[values.Count()];
+
+            for (int i = 0; i < values.Count(); i++)
+            {
+                QuestionTypeText[i] = Question.GetDescription(values.ElementAt(i));
+            }
         }
 
         public Question Question { get; set; }
+
+        public String[] QuestionTypeText { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
