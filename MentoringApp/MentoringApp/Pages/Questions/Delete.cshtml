@@ -18,6 +18,12 @@
         <dd>
             @Html.DisplayFor(model => model.Question.QuestionText)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Question.Type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.QuestionTypeText[(int)(Model.Question.Type)])
+        </dd>
     </dl>
     
     <form method="post">

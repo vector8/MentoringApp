@@ -18,10 +18,26 @@ namespace MentoringApp.Pages.Questions
         public EditModel(MentoringApp.Data.ApplicationDbContext context)
         {
             _context = context;
+            QuestionTypes = new List<SelectListItem>();
+
+            var values = Enum.GetValues(typeof(Question.QuestionType)).Cast<Question.QuestionType>();
+
+            foreach (var v in values)
+            {
+                SelectListItem item = new SelectListItem
+                {
+                    Text = Question.GetDescription(v),
+                    Value = v.ToString()
+                };
+
+                QuestionTypes.Add(item);
+            }
         }
 
         [BindProperty]
         public Question Question { get; set; }
+
+        public List<SelectListItem> QuestionTypes { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

@@ -12,9 +12,10 @@ using System;
 namespace MentoringApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180313161512_BACKTONORMALCUZUSERSSUCK")]
+    partial class BACKTONORMALCUZUSERSSUCK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -125,16 +126,6 @@ namespace MentoringApp.Data.Migrations
                     b.ToTable("Answer");
                 });
 
-            modelBuilder.Entity("MentoringApp.Models.Match", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Match");
-                });
-
             modelBuilder.Entity("MentoringApp.Models.Question", b =>
                 {
                     b.Property<int>("ID")
@@ -171,8 +162,6 @@ namespace MentoringApp.Data.Migrations
                     b.Property<string>("LastName")
                         .IsRequired();
 
-                    b.Property<int?>("MatchID");
-
                     b.Property<string>("Phone");
 
                     b.Property<string>("Program")
@@ -181,8 +170,6 @@ namespace MentoringApp.Data.Migrations
                     b.Property<string>("StudentNumber");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("MatchID");
 
                     b.ToTable("Student");
                 });
@@ -282,13 +269,6 @@ namespace MentoringApp.Data.Migrations
                         .WithMany()
                         .HasForeignKey("StudentFkID")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("MentoringApp.Models.Student", b =>
-                {
-                    b.HasOne("MentoringApp.Models.Match", "Match")
-                        .WithMany()
-                        .HasForeignKey("MatchID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

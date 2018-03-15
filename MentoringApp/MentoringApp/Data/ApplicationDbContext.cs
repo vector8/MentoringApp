@@ -26,5 +26,6 @@ namespace MentoringApp.Data
         public DbSet<Student> Student { get; set; }
         public DbSet<Question> Question { get; set; }
         public DbSet<Answer> Answer { get; set; }
+        public DbSet<Match> Match { get; set; }
     }
 }

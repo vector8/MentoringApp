@@ -12,6 +12,8 @@
     <Compile Remove="Data\Migrations\20180204215445_AddIsMentorToStudent.Designer.cs" />
     <Compile Remove="Data\Migrations\20180209041933_FileUploadAddMentorData.cs" />
     <Compile Remove="Data\Migrations\20180209041933_FileUploadAddMentorData.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180313174729_StudentMatch.cs" />
+    <Compile Remove="Data\Migrations\20180313174729_StudentMatch.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />

@@ -12,9 +12,10 @@ using System;
 namespace MentoringApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180313174633_Matches")]
+    partial class Matches
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,7 +131,11 @@ namespace MentoringApp.Data.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("MentorID");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("MentorID");
 
                     b.ToTable("Match");
                 });
@@ -171,8 +176,6 @@ namespace MentoringApp.Data.Migrations
                     b.Property<string>("LastName")
                         .IsRequired();
 
-                    b.Property<int?>("MatchID");
-
                     b.Property<string>("Phone");
 
                     b.Property<string>("Program")
@@ -181,8 +184,6 @@ namespace MentoringApp.Data.Migrations
                     b.Property<string>("StudentNumber");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("MatchID");
 
                     b.ToTable("Student");
                 });
@@ -284,11 +285,12 @@ namespace MentoringApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MentoringApp.Models.Student", b =>
+            modelBuilder.Entity("MentoringApp.Models.Match", b =>
                 {
-                    b.HasOne("MentoringApp.Models.Match", "Match")
+                    b.HasOne("MentoringApp.Models.Student", "Mentor")
                         .WithMany()
-                        .HasForeignKey("MatchID");
+                        .HasForeignKey("MentorID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

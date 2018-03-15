@@ -13,17 +13,23 @@
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Question[0].QuestionText)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.question[0].QuestionText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.question[0].Type)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Question) {
+@foreach (var item in Model.question) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.QuestionText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.QuestionTypeText[(int) item.Type])
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a>&nbsp;|&nbsp;<a asp-page="./Details" asp-route-id="@item.ID">Details</a>&nbsp;|&nbsp;<a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
