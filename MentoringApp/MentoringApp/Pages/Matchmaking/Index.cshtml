@@ -1,0 +1,49 @@
+@page
+@model MentoringApp.Pages.Matchmaking.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Matchmaking</h2>
+
+<p>
+    <a asp-page="Create">Make Matches</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.question[0].QuestionText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.question[0].Weight)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Faculty
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.QuestionTypeText[(int)item.Type])
+            </td>
+        </tr>
+        @foreach (var item in Model.question)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<p>
+    <a asp-page="Create">Make Matches</a>
+</p>
