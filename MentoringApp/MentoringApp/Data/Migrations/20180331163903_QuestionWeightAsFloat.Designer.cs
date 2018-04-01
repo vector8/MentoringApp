@@ -12,9 +12,10 @@ using System;
 namespace MentoringApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180331163903_QuestionWeightAsFloat")]
+    partial class QuestionWeightAsFloat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,20 +151,6 @@ namespace MentoringApp.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Question");
-                });
-
-            modelBuilder.Entity("MentoringApp.Models.Settings", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<float>("facultyWeight");
-
-                    b.Property<float>("programWeight");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("MentoringApp.Models.Student", b =>

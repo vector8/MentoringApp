@@ -10,40 +10,40 @@
 <p>
     <a asp-page="Create">Make Matches</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.question[0].QuestionText)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.question[0].Weight)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                Faculty
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => Model.QuestionTypeText[(int)item.Type])
-            </td>
-        </tr>
-        @foreach (var item in Model.question)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionText)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Weight)
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-<p>
-    <a asp-page="Create">Make Matches</a>
-</p>
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.question[0].QuestionText)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.question[0].Weight)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    Faculty
+                </td>
+                <td>
+                    <input name="facultyWeight" type="range" value="@Model.settings.facultyWeight" min="0" max="1" step="0.01" />
+                </td>
+            </tr>
+            @foreach (var item in Model.question)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuestionText)
+                    </td>
+                    <td>
+                        <input name="@Model.getQuestionWeightName(item.ID)" type="range" value="@item.Weight" min="0" max="1" step="0.01" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <input type="submit" value="Make Matches" />
+</form>

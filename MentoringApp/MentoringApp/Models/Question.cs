@@ -58,7 +58,7 @@ namespace MentoringApp.Models
 
         public QuestionType Type { get; set; }
 
-        // Ranges from 1 (least important) to 100 (most important)
-        public int Weight { get; set; }
+        // Ranges from 0 (least important) to 1 (most important)
+        public float Weight { get; set; }
     }
 }

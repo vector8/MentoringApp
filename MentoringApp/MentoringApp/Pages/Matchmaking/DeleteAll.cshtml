@@ -1,0 +1,16 @@
+@page
+@model MentoringApp.Pages.Matchmaking.DeleteAllModel
+
+@{
+    ViewData["Title"] = "DeleteAll";
+}
+
+<h2>Clear Matches</h2>
+
+<h3>Are you sure you want to clear all matches? This action cannot be undone.</h3>
+<div>
+    <form method="post">
+        <input type="submit" value="Delete All" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

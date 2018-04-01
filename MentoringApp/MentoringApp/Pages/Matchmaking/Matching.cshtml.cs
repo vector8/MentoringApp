@@ -10,11 +10,11 @@ using MentoringApp.Models;
 
 namespace MentoringApp.Pages.Matchmaking
 {
-    public class IndexModel : PageModel
+    public class MatchingModel : PageModel
     {
         private readonly MentoringApp.Data.ApplicationDbContext _context;
 
-        public IndexModel(MentoringApp.Data.ApplicationDbContext context)
+        public MatchingModel(MentoringApp.Data.ApplicationDbContext context)
         {
             _context = context;
 
@@ -77,7 +77,7 @@ namespace MentoringApp.Pages.Matchmaking
 
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Matching");
+            return RedirectToPage("./Index");
         }
     }
 }
