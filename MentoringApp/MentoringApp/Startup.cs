@@ -40,6 +40,7 @@ namespace MentoringApp
                     options.Conventions.AuthorizePage("/Account/Logout");
                     options.Conventions.AuthorizeFolder("/Students");
                     options.Conventions.AuthorizeFolder("/Questions");
+                    options.Conventions.AuthorizeFolder("/Matchmaking");
                     options.Conventions.AuthorizeFolder("/Account/Admin", "Admin");
                     options.Conventions.AuthorizePage("/Account/Register", "NoUserEver");
                 });

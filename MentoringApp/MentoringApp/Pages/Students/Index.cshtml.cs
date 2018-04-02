@@ -89,7 +89,10 @@ namespace MentoringApp.Pages.Students
 
             foreach (Answer a in answers)
             {
-                AnswerDict[a.QuestionFk.ID.ToString() + "-" + a.StudentFk.ID.ToString()] = a.AnswerText;
+                if(a.QuestionFk != null && a.StudentFk != null)
+                {
+                    AnswerDict[a.QuestionFk.ID.ToString() + "-" + a.StudentFk.ID.ToString()] = a.AnswerText;
+                }
             }
         }
     }

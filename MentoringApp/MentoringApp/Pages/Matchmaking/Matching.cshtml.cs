@@ -17,27 +17,14 @@ namespace MentoringApp.Pages.Matchmaking
         public MatchingModel(MentoringApp.Data.ApplicationDbContext context)
         {
             _context = context;
-
-            var values = Enum.GetValues(typeof(Question.QuestionType)).Cast<Question.QuestionType>();
-
-            QuestionTypeText = new String[values.Count()];
-
-            for(int i = 0; i < values.Count(); i++)
-            {
-                QuestionTypeText[i] = Question.GetDescription(values.ElementAt(i));
-            }
         }
 
-        public IList<Question> question { get;set; }
-
-        public Settings settings { get; set; }
-
-        public String[] QuestionTypeText { get; set; }
-
-        public async Task OnGetAsync()
+        [HttpPost]
+        public async Task<IActionResult> OnPostAsync()
         {
-            question = await _context.Question.ToListAsync();
+            var question = await _context.Question.ToListAsync();
             var settingsList = await _context.Settings.ToListAsync();
+            Settings settings;
 
             if(settingsList.Count == 0)
             {
@@ -51,33 +38,20 @@ namespace MentoringApp.Pages.Matchmaking
             {
                 settings = settingsList[0];
             }
+
+            return RedirectToPage("./Matches");
         }
 
-        public string getQuestionWeightName(int questionID)
-        {
-            return "question" + questionID.ToString() + "Weight";
-        }
+        //public async Task<IActionResult> OnPostAsync()
+        //{
+        //    var question = await _context.Question.ToListAsync();
+        //    var settingsList = await _context.Settings.ToListAsync();
+        //    var settings = settingsList[0];
+        //    //settings.facultyWeight;
 
-        public async Task<IActionResult> OnPostAsync()
-        {
-            question = await _context.Question.ToListAsync();
-            var settingsList = await _context.Settings.ToListAsync();
-            settings = settingsList[0];
+            
 
-            string facultyWeight = Request.Form["facultyWeight"];
-
-            float fWeight = float.Parse(facultyWeight);
-
-            settings.facultyWeight = fWeight;
-
-            foreach(Question q in question)
-            {
-                q.Weight = float.Parse(Request.Form["question" + q.ID.ToString() + "Weight"]);
-            }
-
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
-        }
+        //    return RedirectToPage("./Index");
+        //}
     }
 }

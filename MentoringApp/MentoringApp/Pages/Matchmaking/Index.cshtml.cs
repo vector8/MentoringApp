@@ -14,6 +14,12 @@ namespace MentoringApp.Pages.Matchmaking
     {
         private readonly MentoringApp.Data.ApplicationDbContext _context;
 
+        private struct MatchValue
+        {
+            public Student mentee;
+            public float value;
+        }
+
         public IndexModel(MentoringApp.Data.ApplicationDbContext context)
         {
             _context = context;
@@ -63,6 +69,8 @@ namespace MentoringApp.Pages.Matchmaking
             question = await _context.Question.ToListAsync();
             var settingsList = await _context.Settings.ToListAsync();
             settings = settingsList[0];
+            var mentors = await _context.Student.Where(s => s.IsMentor && s.Match == null).ToListAsync();
+            var mentees = await _context.Student.Where(s => !s.IsMentor && s.Match == null).ToListAsync();
 
             string facultyWeight = Request.Form["facultyWeight"];
 
@@ -77,7 +85,69 @@ namespace MentoringApp.Pages.Matchmaking
 
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Matching");
+            int groupSize = mentees.Count() / mentors.Count();
+
+            for(int i = 0; i < mentors.Count(); i++)
+            {
+                Match match = new Match();
+                _context.Match.Add(match);
+                await _context.SaveChangesAsync();
+
+                mentors[i].Match = match;
+
+                var mentorAnswers = await _context.Answer.Where(a => a.StudentFk.ID == mentors[i].ID).ToListAsync();
+
+                List<MatchValue> matchValues = new List<MatchValue>();
+
+                foreach (Student mentee in mentees)
+                {
+                    if (mentee.Match != null)
+                        continue;
+
+                    MatchValue matchValue = new MatchValue();
+                    matchValue.mentee = mentee;
+
+                    if(mentors[i].Faculty == mentee.Faculty)
+                    {
+                        matchValue.value += fWeight;
+                    }
+                    
+                    // Calculate match value between mentor and mentee
+                    foreach(Answer mentorAnswer in mentorAnswers)
+                    {
+                        var menteeAnswer = await _context.Answer.Where(a => a.StudentFk.ID == mentee.ID && a.QuestionFk.ID == mentorAnswer.QuestionFk.ID).SingleAsync();
+
+                        if(menteeAnswer.AnswerText.Equals(mentorAnswer.AnswerText))
+                        {
+                            matchValue.value += (menteeAnswer.QuestionFk.Weight);
+                        }
+                        // else matchValue is 0
+                    }
+
+                    matchValues.Add(matchValue);
+                }
+
+                matchValues.Sort(delegate (MatchValue x, MatchValue y)
+                {
+                    return -1 * x.value.CompareTo(y.value);
+                });
+
+                int tempSize = groupSize;
+                if(i == mentors.Count() - 1)    // This is the last mentor, add all mentees to the group
+                {
+                    tempSize = matchValues.Count();
+                }
+
+                for(int j = 0; j < tempSize; j++)
+                {
+                    matchValues[j].mentee.Match = match;
+                    //mentees.Remove(matchValues[j].mentee);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Matches");
         }
     }
 }
