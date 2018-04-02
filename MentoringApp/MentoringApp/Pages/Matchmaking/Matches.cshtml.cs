@@ -20,9 +20,11 @@ namespace MentoringApp.Pages.Matchmaking
         }
 
         public IList<Student> student { get;set; }
+        public IList<Match> match { get; set; }
 
         public async Task OnGetAsync()
         {
+            match = await _context.Match.ToListAsync();
             student = await _context.Student.ToListAsync();
         }
     }

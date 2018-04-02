@@ -45,16 +45,12 @@
             var mentees = Model.student.Where(a => !a.IsMentor && a.Match != null && a.Match.ID == s.Match.ID);
         <tbody>
             <tr>
-                <td>
-                    @if(mentees.Count() > 0)
-                            {
-                    <span class="icon icon-e" style="float:left; cursor:pointer;"></span>
-                            }
-                            else
-                            {
-                    <span style="display:inline-block;width:14px">&nbsp;</span>
-                            }
-                </td>
+                 @if (mentees.Count() > 0)
+                 {
+                    <td>
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#@s.Match.ID.ToString()">+</button>
+                    </td>
+                 }
                 <td>
                     @s.FirstName
                 </td>
@@ -79,78 +75,93 @@
             </tr>
             <tr style="display:none;">
                 @if (mentees.Count() > 0)
-                    {
-                <td colspan="4" class="innerTable">
+                {
+                    <td colspan="9" class="innerTable">
                     @{
-                                int rowIndex = 0;
+                        //int rowIndex = 0;
 
-                                foreach(var s2 in mentees)
-                                {
-                                    if(rowIndex == 0)
-                                    {
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.student[0].FirstName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.student[0].LastName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.student[0].Email)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.student[0].StudentNumber)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.student[0].Phone)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.student[0].Faculty)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.student[0].Program)
-                    </th>
-                </tr>
-            </thead>
-                                    }
-                                    rowIndex++;
+                        <tbody id="@s.Match.ID.ToString()" class="collapse">
+                        @foreach(var s2 in mentees)
+                        {
+                            @*if(rowIndex == 0)
+                            {
+                                <thead id="@s.Match.ID.ToString()" class="collapse">
+                                    <tr>
+                                        <th></th>
+                                        <th>|</th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.student[0].FirstName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.student[0].LastName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.student[0].Email)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.student[0].StudentNumber)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.student[0].Phone)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.student[0].Faculty)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.student[0].Program)
+                                        </th>
+                                    </tr>
+                                </thead>
+                            }
+                            rowIndex++;*@
 
-            <tbody>
-                <tr>
-                    <td>
-                        @s.FirstName
-                    </td>
-                    <td>
-                        @s.LastName
-                    </td>
-                    <td>
-                        @s.Email
-                    </td>
-                    <td>
-                        @s.StudentNumber
-                    </td>
-                    <td>
-                        @s.Phone
-                    </td>
-                    <td>
-                        @s.Faculty
-                    </td>
-                    <td>
-                        @s.Program
-                    </td>
-                </tr>
-            </tbody>
-                                }
+                                <tr>
+                                    <td>
+                                        <span style="display:inline-block;width:14px">&nbsp;</span>
+                                    </td>
+                                    @*<td>
+                                        @if (mentees.Count() > 0)
+                                        {
+                                            <span class="icon icon-e" style="float:left; cursor:pointer;"></span>
+                                        }
+                                        else
+                                        {
+                                            <span style="display:inline-block;width:14px">}</span>
+                                        }
+                                    </td>*@
+                                    <td>
+                                        @s2.FirstName
+                                    </td>
+                                    <td>
+                                        @s2.LastName
+                                    </td>
+                                    <td>
+                                        @s2.Email
+                                    </td>
+                                    <td>
+                                        @s2.StudentNumber
+                                    </td>
+                                    <td>
+                                        @s2.Phone
+                                    </td>
+                                    <td>
+                                        @s2.Faculty
+                                    </td>
+                                    <td>
+                                        @s2.Program
+                                    </td>
+                                </tr>
+                        }
+                        </tbody>
                     }
                     </td>
-                    }
-                    else
-                    {
-                    <td colspan="4"></td>
-                    }
-                </tr>
-                </tbody>
-        }
+                }
+                else
+                {
+                    <td colspan="9"></td>
+                }
+            </tr>
+        </tbody>
     }
+}
 </table>

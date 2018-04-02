@@ -11,3 +11,16 @@
 <div>
     <img src="~/images/loader.gif" alt="" />
 </div>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"></script>
+
+<script>
+            $(document).ready(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("OnPostAsync")',
+                }).fail(function (a, b, c) {
+                    console.log(c);
+                });
+            });
+</script>

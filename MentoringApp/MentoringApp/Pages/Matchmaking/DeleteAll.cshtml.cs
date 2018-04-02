@@ -21,13 +21,19 @@ namespace MentoringApp.Pages.Matchmaking
 
         public async Task<IActionResult> OnPostAsync()
         {
+            var matches = await _context.Match.ToListAsync();
             var students = await _context.Student.ToListAsync();
 
             foreach(var s in students)
-            {
+            { 
                 s.Match = null;
             }
-            _context.Database.ExecuteSqlCommand("delete from Match");
+            foreach (var m in matches)
+            {
+                _context.Match.Remove(m);
+            }
+            //_context.Database.ExecuteSqlCommand("update Student set MatchID = NULL");
+            //_context.Database.ExecuteSqlCommand("delete from Match");
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
